@@ -6,5 +6,12 @@ export default defineConfig({
   plugins: [react()],
   server: {
     open: true, // This will open the browser automatically
+    proxy: {
+      "/api": {
+        target: "http://localhost:8080",
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, ""),
+      },
+    },
   },
 });
